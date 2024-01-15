@@ -16,18 +16,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class CardDeliveryTest {
-    public static String getDate(int days, String pattern) {
-        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy", new Locale("ru")));
+    private static String getDate(int days, String pattern) {
+        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern(pattern));
     }
+        @Test
+        public void shouldBeCorrect() {
 
-    @BeforeEach
-    void setUp() {
         open("http://localhost:9999/");
-        holdBrowserOpen = true;
-    }
 
-    @Test
-    void shouldBeCorrect() {
         $("[data-test-id=city] input").setValue("Санкт-Петербург");
         String planningDate = getDate(3, "dd.MM.yyyy");
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
@@ -39,6 +35,5 @@ public class CardDeliveryTest {
         $("[data-test-id=notification]")
                 .shouldBe(Condition.visible, Duration.ofSeconds(20))
                 .shouldHave(exactText("Успешно! Встреча успешно забронирована на " + planningDate));
-
-    }
+        }
 }
