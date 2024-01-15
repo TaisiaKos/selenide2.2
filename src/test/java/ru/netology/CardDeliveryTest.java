@@ -1,17 +1,14 @@
 package ru.netology;
 
 import com.codeborne.selenide.Condition;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Configuration.holdBrowserOpen;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -22,7 +19,7 @@ public class CardDeliveryTest {
         @Test
         public void shouldBeCorrect() {
 
-        open("http://localhost:9999/");
+        open("http://localhost:7777/");
 
         $("[data-test-id=city] input").setValue("Санкт-Петербург");
         String planningDate = getDate(3, "dd.MM.yyyy");
